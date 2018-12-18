@@ -11,16 +11,16 @@ if [ ! -d "/run/mysqld" ]; then
 	chown -R mysql:mysql /run/mysqld
 fi
 
-if [ -d /var/lib/mysql/mysql ]; then
+if [ -d /var/lib/mariadb/mysql ]; then
 	echo '[i] MySQL directory already present, skipping creation'
 else
 	echo "[i] MySQL data directory not found, creating initial DBs"
 
-	chown -R mysql:mysql /var/lib/mysql
+	chown -R mysql:mysql /var/lib/mariadb
 
 	# init database
 	echo 'Initializing database'
-	mysql_install_db --user=mysql --innodb-flush-method=fsync > /dev/null
+	mysql_install_db --user=mysql --innodb-flush-method=fsync --datadir=/var/lib/mariadb > /dev/null
 	echo 'Database initialized'
 
 	echo "[i] MySql root password: $MYSQL_ROOT_PWD"
