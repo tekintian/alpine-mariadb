@@ -31,8 +31,12 @@ $ docker run --name mariadb -v /mariadb/data/:/var/lib/mysql -d -p 3306:3306 -e 
 
 #### run a container with new Database for new User and Password
 
-```
+```shell
 $ docker run --name mariadb -v /mariadb/data/:/var/lib/mysql -d -p 3306:3306 -e MYSQL_ROOT_PWD=123 -e MYSQL_USER=dev -e MYSQL_USER_PWD=dev -e MYSQL_USER_DB=userdb tekintian/alpine-mariadb
 ```
 
 #### RUN a container with your [TIME ZONE](https://timezonedb.com/time-zones)
+```shell
+# -e TZ=America/Los_Angeles for us los_angeles user
+docker run --name mariadb -v /mariadb/data/:/var/lib/mysql -d -p 3306:3306 -e TZ=America/Los_Angeles  -e MYSQL_ROOT_PWD=123 -e MYSQL_USER=dev -e MYSQL_USER_PWD=dev -e MYSQL_USER_DB=userdb tekintian/alpine-mariadb
+```
