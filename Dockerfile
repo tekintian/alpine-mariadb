@@ -1,29 +1,18 @@
-#
-# This is the alpine linux work with Mariadb/mysql docker images
-# @author tekintian
-# @url http://github.com/tekintian/alpine-mariadb
-# @apk https://pkgs.alpinelinux.org/package/edge/main/s390x/mysql
-# @Project	http://www.mariadb.org
+FROM alpine:latest
+MAINTAINER IPBurger <accounts@ipburger.com>
 
-FROM tekintian/alpine:3.8
+RUN apk add --no-cache mysql mysql-client
 
-LABEL maintainer="TekinTian <tekintian@gmail.com>"
+COPY bin/startup.sh /startup.sh
+COPY conf/my.cnf /etc/mysql/my.cnf
 
-#set TimeZone
-ARG TZ="Asia/Shanghai"
-ENV TZ ${TZ}
+RUN mkdir -p /run/mysqld && mkdir -p /dbinit.d
+RUN echo "test"
+RUN echo "test2"
 
-RUN apk update && \
-	apk add mysql mysql-client && \
-	addgroup mysql mysql && \
-	mkdir /scripts && \
-	rm -rf /var/cache/apk/*
-
-VOLUME ["/var/lib/mariadb"]
-
-COPY ./startup.sh /scripts/startup.sh
-RUN chmod +x /scripts/startup.sh
-
+WORKDIR /db
+VOLUME /db
 EXPOSE 3306
 
-ENTRYPOINT ["/scripts/startup.sh"]
+HEALTHCHECK CMD ["mysqladmin", "ping"]
+CMD ["/startup.sh"]
