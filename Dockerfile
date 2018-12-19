@@ -81,7 +81,7 @@ RUN set -xe \
 	\
 # .build-deps end
 	\
-	&& cd /tmp/mariadb-$MARIADB_VERSION
+	&& cd /tmp/mariadb-$MARIADB_VERSION \
 	&& cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mariadb \
     -DMYSQL_DATADIR=/usr/local/mariadb/data \
     -DDOWNLOAD_BOOST=1 \
@@ -114,7 +114,8 @@ RUN set -xe \
 # configuration
 COPY conf/my.cnf /etc/my.cnf
 COPY bin/startup.sh /usr/local/mariadb/startup.sh
-ENTRYPOINT ["docker-php-entrypoint"]
+
+#ENTRYPOINT ["/usr/local/mariadb/startup.sh"]
 
 EXPOSE 9000
 VOLUME /usr/local/mariadb/data
