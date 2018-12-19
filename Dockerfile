@@ -98,7 +98,7 @@ RUN set -xe \
     -DDEFAULT_CHARSET=utf8mb4 \
     -DDEFAULT_COLLATION=utf8mb4_general_ci \
     -DEXTRA_CHARSETS=all \
-    -DCMAKE_EXE_LINKER_FLAGS='-ljemalloc'
+    -DCMAKE_EXE_LINKER_FLAGS='-ljemalloc' \
     && make -j 2 \
 	&& make -j "$(nproc)" \
 	&& make install \
