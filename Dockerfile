@@ -60,6 +60,8 @@ RUN set -xe; \
 	apk add --no-cache --virtual .fetch-deps \
 		gnupg \
 		wget \
+		tar \
+		xz \
 	; \
 	\
 	cd /tmp/ ; \
@@ -103,8 +105,6 @@ RUN set -xe \
 	&& make -j "$(nproc)" \
 	&& make install \
 	&& make clean \
-	\
-	&& apk add --no-cache --virtual .mysql-rundeps $runDeps \
 	\
 	&& apk del .build-deps \
 	\
