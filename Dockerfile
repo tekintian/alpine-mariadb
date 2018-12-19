@@ -63,9 +63,9 @@ RUN set -xe; \
 	; \
 	\
 	cd /tmp/ ; \
-	tar -Jxf boost_1_59_0.xz; \
+	tar -Jxf boost_1_59_0.xz > /dev/null ; \
 	wget -O mariadb-$MARIADB_VERSION.tar.gz "$PHP_URL"; \
-	tar -zxf mariadb-$MARIADB_VERSION.tar.gz; \
+	tar -zxf mariadb-$MARIADB_VERSION.tar.gz > /dev/null ; \
 	\
 	apk del .fetch-deps
 
