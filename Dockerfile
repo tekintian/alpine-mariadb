@@ -13,7 +13,7 @@ ENV MARIADB_VERSION 10.3.11
 ENV MARIADB_URL="https://mirrors.shu.edu.cn/mariadb/mariadb-$MARIADB_VERSION/source/mariadb-$MARIADB_VERSION.tar.gz"
 
 # add the mysql boost compile
-ADD src/boost_1_59_0.tar.gz /tmp/boost_1_59_0.tar.gz
+COPY /src/boost_1_59_0.tar.gz /tmp/boost_1_59_0.tar.gz
 
 # dependencies required for building
 ENV MYSQL_DEPS \
