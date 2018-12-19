@@ -7,11 +7,10 @@
 
 FROM tekintian/alpine:3.8
 
+# https://mirrors.shu.edu.cn/mariadb/mariadb-10.3.11/source/mariadb-10.3.11.tar.gz
 
 ENV MARIADB_VERSION 10.3.11
-ENV MARIADB_URL="https://downloads.mariadb.org/interstitial/mariadb-$MARIADB_VERSION/source/mariadb-$MARIADB_VERSION.tar.gz"
-
-https://mirrors.shu.edu.cn/mariadb//mariadb-10.3.11/source/mariadb-10.3.11.tar.gz
+ENV MARIADB_URL="https://mirrors.shu.edu.cn/mariadb/mariadb-$MARIADB_VERSION/source/mariadb-$MARIADB_VERSION.tar.gz"
 
 # add the mysql boost compile
 ADD src/boost_1_59_0.xz /tmp/boost_1_59_0.xz
