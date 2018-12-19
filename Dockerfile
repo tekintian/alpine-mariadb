@@ -13,7 +13,7 @@ ENV MARIADB_VERSION 10.3.11
 ENV MARIADB_URL="https://mirrors.shu.edu.cn/mariadb/mariadb-$MARIADB_VERSION/source/mariadb-$MARIADB_VERSION.tar.gz"
 
 # add the mysql boost compile
-ADD src/boost_1_59_0.xz /tmp/boost_1_59_0.xz
+ADD src/boost_1_59_0.tar.gz /tmp/boost_1_59_0.tar.gz
 
 # dependencies required for building
 ENV MYSQL_DEPS \
@@ -60,12 +60,10 @@ RUN set -xe; \
 	apk add --no-cache --virtual .fetch-deps \
 		gnupg \
 		wget \
-		tar \
-		xz \
 	; \
 	\
 	cd /tmp/ ; \
-	tar -Jxf boost_1_59_0.xz > /dev/null ; \
+	tar -zxf boost_1_59_0.tar.gz > /dev/null ; \
 	wget -O mariadb-$MARIADB_VERSION.tar.gz "$PHP_URL"; \
 	tar -zxf mariadb-$MARIADB_VERSION.tar.gz > /dev/null ; \
 	\
