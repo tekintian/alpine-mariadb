@@ -18,7 +18,7 @@ else
     echo "[i] MySQL root Password: $MYSQL_ROOT_PASSWORD"
   fi
 
-  mysql_install_db --user=root > /dev/null
+  /usr/local/mariadb/scripts/mysql_install_db --user=mysql --basedir=/usr/local/mariadb --datadir=/usr/local/mariadb/data > /dev/null
 
   MYSQL_DATABASE=${MYSQL_DATABASE:-""}
   MYSQL_USER=${MYSQL_USER:-""}
@@ -47,14 +47,14 @@ EOF
     fi
   fi
 
-  /usr/bin/mysqld --user=root --bootstrap --verbose=0 < $tfile
+  /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 < $tfile
   rm -f $tfile
 
   echo "[dbinit.d] finding files"
   if [ "$(ls -A /dbinit.d)" ]; then
     echo "[dbinit.d] found init files"
     SOCKET="/tmp/mysql.sock"
-    mysqld --user=root --skip-networking --socket="${SOCKET}" &
+    mysqld --user=mysql --skip-networking --socket="${SOCKET}" &
 
     for i in {30..0}; do
       if mysqladmin --socket="${SOCKET}" ping &>/dev/null; then
@@ -76,8 +76,8 @@ EOF
       esac
     done
     echo '[dbinit.d] Finished.'
-    mysqladmin shutdown --user=root --socket="${SOCKET}"
+    mysqladmin shutdown --user=mysql --socket="${SOCKET}"
   fi
 fi
 
-exec /usr/bin/mysqld --user=root --console
+exec /usr/bin/mysqld --user=mysql --console
