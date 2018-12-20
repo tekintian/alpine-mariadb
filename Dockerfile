@@ -31,11 +31,11 @@ ENV MYSQL_DEPS \
 		git \
 		libxml2-dev \
 		libxml2 \
-		\
 		openssl-dev \
         libaio-dev \
-        libcurl libarchive-dev \
-        boost boost-dev \
+        libarchive-dev \
+        boost \
+        boost-dev \
         libaio-dev \
         libarchive-dev \
         jemalloc-dev \
@@ -62,10 +62,10 @@ RUN set -xe; \
 		wget \
 	; \
 	\
-	cd /tmp/ ; \
-	tar -zxf boost_1_59_0.tar.gz > /dev/null ; \
-	wget -O mariadb-$MARIADB_VERSION.tar.gz "$PHP_URL"; \
-	tar -zxf mariadb-$MARIADB_VERSION.tar.gz > /dev/null ; \
+	cd /tmp/; \
+	tar -zxf boost_1_59_0.tar.gz > /dev/null; \
+	wget -O mariadb-$MARIADB_VERSION.tar.gz "$MARIADB_URL"; \
+	tar -zxf mariadb-$MARIADB_VERSION.tar.gz >/dev/null; \
 	\
 	apk del .fetch-deps
 
